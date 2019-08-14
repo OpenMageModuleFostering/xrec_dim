@@ -1,0 +1,65 @@
+<?php
+$_code = $this->getMethodCode();
+$helper = Mage::Helper('dim/dim');
+$data = Mage::Helper('dim/data');
+$buckets = $helper->doDirectoryRequest();
+
+$options = '';
+foreach ($buckets as $key => $bucket) {
+    $options .= '<optgroup label="' . $key . '">';
+    foreach ($bucket as $bank) {
+        $options .= '<option value="' . $bank->DebtorBankId . '">' . $bank->DebtorBankName . '</option>';
+    }
+    $options .= '</optgroup>';
+}
+?>
+<div class="page-title">
+    <h3>Betaling mislukt / Payment failed</h3>
+</div>
+
+De betaling is helaas mislukt. Probeer het bedrag van
+&euro;<?php echo number_format($this->getOrder()->getGrandTotal(),2) ?> nogmaals af te rekenen met Digitaal Incassomachtigen.
+
+<br /><br />
+
+<form name="xrec_dim_dim" id="xrec_dim_dim" action="<?php echo $this->escapeHtml($this->getForm()) ?>" method="post">
+    <input type="hidden" name="order_id" value="<?php echo $this->escapeHtml($this->getOrder()->getId()) ?>" />
+    <ul class="form-list">
+        <li>
+            <label for="dim_bank_id" class="required"><em>*</em>
+                <?php echo $this->__('Selecteer uw bank:') ?>
+            </label>
+            <select name="dim_bank_id" class="required-entry" id="dim_bank_id">
+                <?php echo $options?>
+            </select>
+        </li>
+        <?php if ($data->getConfig('SequenceTypeCustomer')) :?>
+        <li>
+            <label for="dim_sequence_type"
+                   class="required"><em>*</em><?php echo $this->__('Machtiging type:') ?></label>
+            <select name="dim_sequence_type" id="dim_sequence_type" class="required-entry">
+                <option value="OOFF">Machtiging eenmalige SEPA incasso</option>
+                <option value="RCUR">Machtiging doorlopende SEPA incasso</option>
+            </select>
+        </li>
+        <?php endif;?>
+        <li>
+            <button class="form-button" style="padding:5px;" type="submit">Betalen</button>
+        </li>
+    </ul>
+</form>
+
+<div class="buttons-set">
+    <p class="back-link">
+        <a href="<?php echo $this->escapeHtml(Mage::getBaseUrl()) ?>">
+            <small>&laquo; </small>
+            <?php echo $this->__('Homepage') ?>
+        </a>
+    </p>
+</div>
+
+<script type="text/javascript">
+    //< ![CDATA[
+    var dimForm = new VarienForm('xrec_dim_dim');
+    //]]>
+</script>

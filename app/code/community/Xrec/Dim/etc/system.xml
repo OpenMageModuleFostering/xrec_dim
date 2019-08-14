@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <xrec translate="label" module="dim">
+                    <label>Digitaal Incassomachtigen via uw bank</label>
+                    <expanded>1</expanded>
+                    <sort_order>-100</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+                        <active translate="label tooltip">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip><![CDATA[<b>Status:</b> <br/>]]> Enable or disable the Digitaal Incassomachtigen plugin.</tooltip>
+                        </active>
+
+                        <testMode translate="label">
+                            <label>Testmode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip><![CDATA[<b>Testmode:</b> <br/>]]> Gebruik de testmode om betalingen te testen zonder een echte betaling te doen.</tooltip>
+                        </testMode>
+
+                        <merchantID translate="label tooltip">
+                            <label>Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip><![CDATA[<b>Merchant ID:</b> <br/>]]> Your merchant ID. The payment is added to this account.</tooltip>
+                            <validate>validate-number</validate>
+                        </merchantID>
+
+                        <merchantSubID translate="label tooltip">
+                            <label>Merchant SubID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>validate-number</frontend_class>
+                            <tooltip>eMandate.ContractSubId as supplied to you by the creditor bank. If you do not have a ContractSubId, use 0 for this field.</tooltip>
+                        </merchantSubID>
+
+                        <SequenceTypeCustomer translate="label tooltip">
+                            <label>SequenceType Choice</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Allow to choice SequenceType by customer.</tooltip>
+                        </SequenceTypeCustomer>
+
+                        <SequenceType translate="label tooltip">
+                            <label>Sequence Type</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>OOFF = one-off | RCUR = recurring</comment>
+                            <tooltip>Indicates type of eMandate: one-off Direct Debit or recurring.</tooltip>
+                        </SequenceType>
+
+                        <eMandateReason translate="label tooltip">
+                            <label>Mandate Reason</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>24</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>webshop purchase</tooltip>
+                        </eMandateReason>
+
+                        <merchantReturnURL translate="label tooltip">
+                            <label>Return URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>A valid URL to which the debtor banks redirects to, after the debtor has authorized a transaction.</tooltip>
+                        </merchantReturnURL>
+
+                        <passphrase translate="label tooltip">
+                            <label>Passphrase</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>The password for the private key of the signing certificate.</tooltip>
+                        </passphrase>
+
+                        <AcquirerUrl_DirectoryReq translate="label tooltip">
+                            <label>AcquirerUrl_DirectoryReq</label>
+                            <comment>https://machtigen.secure-ing.com/EMRoutingWS/handler/ing</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>51</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>The URL to which the library sends Directory request messages.</tooltip>
+                        </AcquirerUrl_DirectoryReq>
+
+                        <AcquirerUrl_TransactionReq translate="label tooltip">
+                            <label>AcquirerUrl_TransactionReq</label>
+                            <comment>https://machtigen.secure-ing.com/EMRoutingWS/handler/ing</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>The URL to which the library sends Transaction request messages (including eMandates messages).</tooltip>
+                        </AcquirerUrl_TransactionReq>
+
+                        <AcquirerUrl_StatusReq translate="label tooltip">
+                            <label>AcquirerUrl_StatusReq</label>
+                            <comment>https://machtigen.secure-ing.com/EMRoutingWS/handler/ing</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>71</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>The URL to which the library sends Status request messages</tooltip>
+                        </AcquirerUrl_StatusReq>
+
+                        <AcquirerUrl_DirectoryReqTest translate="label tooltip">
+                            <label>TEST AcquirerUrl_DirectoryReq</label>
+                            <comment>https://machtigen.secure-ing.com/TestRoutingWS/handler/ing</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>81</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>The URL to which the library sends Directory request messages.</tooltip>
+                        </AcquirerUrl_DirectoryReqTest>
+
+                        <AcquirerUrl_TransactionReqTest translate="label tooltip">
+                            <label>TEST AcquirerUrl_TransactionReq</label>
+                            <comment>https://machtigen.secure-ing.com/TestRoutingWS/handler/ing</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>91</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>The URL to which the library sends Transaction request messages (including eMandates messages).</tooltip>
+                        </AcquirerUrl_TransactionReqTest>
+
+                        <AcquirerUrl_StatusReqTest translate="label tooltip">
+                            <label>TEST AcquirerUrl_StatusReq</label>
+                            <comment>https://machtigen.secure-ing.com/TestRoutingWS/handler/ing</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
+                            <tooltip>The URL to which the library sends Status request messages.</tooltip>
+                        </AcquirerUrl_StatusReqTest>
+
+                        <keyFile translate="label">
+                            <label>Key File (.pem)</label>
+                            <frontend_type>file</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_file</backend_model>
+                            <upload_dir>var/xrec/dim/cer</upload_dir>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>The file containing the private key to use for signing messages to the creditor bank (aka the signing certificate).</comment>
+                        </keyFile>
+
+                        <crtFile translate="label">
+                            <label>Certificate File (.cer)</label>
+                            <frontend_type>file</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_file</backend_model>
+                            <upload_dir>var/xrec/dim/cer</upload_dir>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>The file containing the public key of the signing certificate.</comment>
+                        </crtFile>
+
+                        <crtFileAquirer translate="label">
+                            <label>Certificate File Aquirer (.cer)</label>
+                            <frontend_type>file</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_file</backend_model>
+                            <upload_dir>var/xrec/dim/cer</upload_dir>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>The file containing the public key of the certificate to use to validate messages from the creditor bank.</comment>
+                        </crtFileAquirer>
+
+                    </fields>
+                </xrec>
+            </groups>
+        </payment>
+    </sections>
+</config>

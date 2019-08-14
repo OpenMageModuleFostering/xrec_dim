@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/XREC_DIM",
+    "type": "magento-module",
+    "license": "paid",
+    "homepage": "",
+    "description": "Digitaal Incassomachtigen",
+    "authors": [
+    {
+        "name": "xrec.nl",
+        "email": "info@xrec.nl"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

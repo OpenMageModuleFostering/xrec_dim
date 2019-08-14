@@ -1,0 +1,9 @@
+#p_method_dim + label:before {
+    display: inline-block;
+    content:"icon";
+    text-indent:-999em;
+    width: 25px;
+    height: 20px;
+    margin-top: -3px;
+    background: transparent url('../images/dim.jpg') no-repeat;
+}

@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Xrec_Dim>
+            <version>1.0.0</version>
+        </Xrec_Dim>
+    </modules>
+
+    <global>
+        <models>
+            <dim>
+                <class>Xrec_Dim_Model</class>
+            </dim>
+        </models>
+        <blocks>
+            <dim>
+                <class>Xrec_Dim_Block</class>
+            </dim>
+            <payment>
+                <class>Xrec_Dim_Block</class>
+                <class>Mage_Payment_Block</class>
+            </payment>
+        </blocks>
+        <helpers>
+            <dim>
+                <class>Xrec_Dim_Helper</class>
+            </dim>
+        </helpers>
+        <payment>
+            <groups>
+                <xrec>xrec</xrec>
+            </groups>
+        </payment>
+        <resources>
+            <dim_setup>
+                <setup>
+                    <module>Xrec_Dim</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </dim_setup>
+            <dim_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </dim_write>
+            <dim_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </dim_read>
+        </resources>
+        <layouts>
+            <xrec_exception>
+                <label>Xrec Exception</label>
+                <template>xrec/page/exception.phtml</template>
+            </xrec_exception>
+            <api_payment_fail>
+                <label>Payment Failed</label>
+                <template>xrec/page/fail.phtml</template>
+            </api_payment_fail>
+        </layouts>
+    </global>
+
+    <frontend>
+        <routers>
+            <dim>
+                <use>standard</use>
+                <args>
+                    <module>Xrec_Dim</module>
+                    <frontName>dim</frontName>
+                </args>
+            </dim>
+        </routers>
+        <translate>
+            <modules>
+                <Xrec_Dim>
+                    <files>
+                        <default>Xrec_Dim.csv</default>
+                    </files>
+                </Xrec_Dim>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <dim>
+                    <file>dim.xml</file>
+                </dim>
+            </updates>
+        </layout>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Xrec_Dim>
+                    <files>
+                        <default>Xrec_Dim.csv</default>
+                    </files>
+                </Xrec_Dim>
+            </modules>
+        </translate>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <xrec>
+                                            <title>Digitaal Incassomachtigen via uw bank</title>
+                                        </xrec>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <dim>
+                    <file>dim.xml</file>
+                </dim>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <!-- declare default configuration values for this module -->
+    <default>
+        <!-- 'payment' configuration section (tab) -->
+        <payment>
+            <dim>
+                <!-- by default this payment method is inactive -->
+                <active>1</active>
+                <!-- model to handle logic for this payment method -->
+                <model>dim/dim</model>
+                <!-- order status for new orders paid by this payment method -->
+                <!--<order_status>pending</order_status>-->
+                <!-- default title for payment checkout page and order view page -->
+                <title>Digitaal Incassomachtigen via uw bank</title>
+                <group>xrec</group>
+
+            </dim>
+            <xrec>
+                <!-- DEFAULT VALUES -->
+                <testMode>1</testMode>
+                <eMandateReason>webshop purchase</eMandateReason>
+                <AcquirerUrl_DirectoryReq>https://machtigen.secure-ing.com/EMRoutingWS/handler/ing</AcquirerUrl_DirectoryReq>
+                <AcquirerUrl_TransactionReq>https://machtigen.secure-ing.com/EMRoutingWS/handler/ing</AcquirerUrl_TransactionReq>
+                <AcquirerUrl_StatusReq>https://machtigen.secure-ing.com/EMRoutingWS/handler/ing</AcquirerUrl_StatusReq>
+                <AcquirerUrl_DirectoryReqTest>https://machtigen.secure-ing.com/TestRoutingWS/handler/ing</AcquirerUrl_DirectoryReqTest>
+                <AcquirerUrl_TransactionReqTest>https://machtigen.secure-ing.com/TestRoutingWS/handler/ing</AcquirerUrl_TransactionReqTest>
+                <AcquirerUrl_StatusReqTest>https://machtigen.secure-ing.com/TestRoutingWS/handler/ing</AcquirerUrl_StatusReqTest>
+                <merchantReturnURL>{{base_url}}</merchantReturnURL>
+                <SequenceType>OOFF</SequenceType>
+                <SequenceTypeCustomer>0</SequenceTypeCustomer>
+            </xrec>
+        </payment>
+    </default>
+
+</config>

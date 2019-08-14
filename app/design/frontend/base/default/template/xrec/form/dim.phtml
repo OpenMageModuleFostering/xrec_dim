@@ -1,0 +1,36 @@
+<?php
+$_code = $this->getMethodCode();
+$helper = Mage::Helper('dim/dim');
+$data = Mage::Helper('dim/data');
+$buckets = $helper->doDirectoryRequest();
+
+$options = '';
+foreach ($buckets as $key => $bucket) {
+    $options .= '<optgroup label="' . $key . '">';
+    foreach ($bucket as $bank) {
+        $options .= '<option value="' . $bank->DebtorBankId . '">' . $bank->DebtorBankName . '</option>';
+    }
+    $options .= '</optgroup>';
+}
+
+?>
+
+<ul class="form-list" id="payment_form_<?php echo $this->escapeHtml($_code) ?>" style="display:none;">
+    <li>
+        <label for="dim_bank_id"
+               class="required"><em>*</em><?php echo $this->__('Selecteer uw bank:') ?></label>
+        <select name="payment[dim_bank_id]" id="dim_bank_id" class="required-entry">
+            <?php echo $options; ?>
+        </select>
+    </li>
+    <?php if ($data->getConfig('SequenceTypeCustomer')) :?>
+    <li>
+        <label for="dim_sequence_type"
+               class="required"><em>*</em><?php echo $this->__('Machtiging type:') ?></label>
+        <select name="payment[dim_sequence_type]" id="dim_sequence_type" class="required-entry">
+            <option value="OOFF">Machtiging eenmalige SEPA incasso</option>
+            <option value="RCUR">Machtiging doorlopende SEPA incasso</option>
+        </select>
+    </li>
+    <?php endif;?>
+</ul>
